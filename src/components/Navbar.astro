@@ -1,0 +1,48 @@
+---
+interface Props {
+    logo?: string;
+    logoAlt?: string;
+    links?: { href: string; label: string }[];
+}
+
+const {
+    logo = "/favicon.svg",
+    logoAlt = "Site Logo",
+    links = [
+        { href: "/", label: "Home" },
+        { href: "/about", label: "About" },
+        { href: "/contact", label: "Contact" }
+    ]
+} = Astro.props;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div class="flex items-center">
+                <a href="/" class="flex-shrink-0">
+                    <img class="h-8 w-auto" src={logo} alt={logoAlt} />
+                </a>
+            </div>
+
+            {/* Navigation Links */}
+            <div class="flex space-x-4">
+                {links.map((link) => (
+                    <a 
+                        href={link.href} 
+                        class="text-gray-800 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                    >
+                        {link.label}
+                    </a>
+                ))}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style is:global>
+    body {
+        padding-top: 4rem; /* Adjust based on navbar height */
+    }
+</style>
