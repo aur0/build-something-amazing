@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -9,5 +11,9 @@ export default defineConfig({
       applyBaseStyles: true,
       configFile: './tailwind.config.mjs'
     })
-  ]
+  ],
+
+  adapter: cloudflare({
+    mode: 'directory'
+  })
 });
